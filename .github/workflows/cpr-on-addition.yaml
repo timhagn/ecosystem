@@ -7,6 +7,7 @@ on:
 
 jobs:
   createPullRequest:
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ecosystem...
@@ -18,8 +19,7 @@ jobs:
         id: vars
         run: |
           cd ecosystem
-          echo ::set-output name=pr_author::"$(git log --pretty=format:'%an' -1)"
-          echo ::set-output name=pr_title::"${{ steps.vars.outputs.pr_author }} wants to merge: $(git log --pretty=format:'%s' -1)"
+          echo ::set-output name=pr_title::"$(git log --pretty=format:'%an' -1) wants to add: $(git log --pretty=format:'%s' -1)"
           echo ::set-output name=pr_body::"This PR was auto-generated on $(date +%d-%m-%Y) \
             by [create-pull-request](https://github.com/peter-evans/create-pull-request)."
 
