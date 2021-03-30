@@ -9,6 +9,13 @@ jobs:
   createPullRequest:
     runs-on: ubuntu-latest
     steps:
+      - name: Set variables
+        id: vars
+        run: |
+          echo ::set-output name=pr_title::"Add report file $(date +%d-%m-%Y)"
+          echo ::set-output name=pr_body::"This PR was auto-generated on $(date +%d-%m-%Y) \
+            by [create-pull-request](https://github.com/peter-evans/create-pull-request)."
+
       - name: Checkout ecosystem...
         uses: actions/checkout@v2
         with:
@@ -24,7 +31,6 @@ jobs:
       - name: Add changes to solana-com
         run: |
           ls -la
-          /usr/bin/git --version
           cp $GITHUB_WORKSPACE/ecosystem/partners/* $GITHUB_WORKSPACE/solana-th/src/partners/
           cp $GITHUB_WORKSPACE/ecosystem/img/* $GITHUB_WORKSPACE/solana-th/static/img/
 
@@ -34,3 +40,5 @@ jobs:
           token: ${{ secrets.SOLANA_PAT }}
           base: master
           path: solana-th
+          title: ${{ steps.vars.outputs.pr_title }}
+          body: ${{ steps.vars.outputs.pr_body }}
