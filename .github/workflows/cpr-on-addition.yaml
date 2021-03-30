@@ -12,7 +12,8 @@ jobs:
       - name: Set variables
         id: vars
         run: |
-          echo ::set-output name=pr_title::"Add report file $(date +%d-%m-%Y)"
+          echo ::set-output name=pr_author::"$(git log --pretty=format:'%an' -1)"
+          echo ::set-output name=pr_title::"${{ steps.vars.outputs.pr_author }} wants to merge: $(git log --pretty=format:'%s' -1)"
           echo ::set-output name=pr_body::"This PR was auto-generated on $(date +%d-%m-%Y) \
             by [create-pull-request](https://github.com/peter-evans/create-pull-request)."
 
