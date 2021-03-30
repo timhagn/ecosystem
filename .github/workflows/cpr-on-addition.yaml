@@ -7,6 +7,7 @@ on:
 env:
   REMOTE_BASE: ${{ 'timhagn' }}
   REMOTE_NAME: ${{ 'solana-th' }}
+  REMOTE_REPO: '${{ env.REMOTE_BASE }}/${{ env.REMOTE_NAME }}'
 
 jobs:
   createPullRequest:
@@ -14,7 +15,7 @@ jobs:
     steps:
       - name: Echo repositories & paths
         run: |
-          echo "Remote repo name: $REMOTE_BASE/$REMOTE_NAME"
+          echo "Remote repo name: $REMOTE_BASE/$REMOTE_NAME - $REMOTE_REPO"
 
       - name: Checkout ecosystem...
         uses: actions/checkout@v2
@@ -23,7 +24,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.SOLANA_PAT }}
-          repository: ${{ "$REMOTE_BASE/$REMOTE_NAME" }}
+          repository: ${ REMOTE_REPO }
 
       - name: Add changes to solana-com
         run: |
