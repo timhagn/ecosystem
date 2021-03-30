@@ -31,4 +31,5 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.SOLANA_PAT }}
+          base: master
           path: $GITHUB_WORKSPACE/solana-th
