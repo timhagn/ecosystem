@@ -7,7 +7,7 @@ on:
 env:
   REMOTE_BASE: ${{ 'timhagn' }}
   REMOTE_NAME: ${{ 'solana-th' }}
-  REMOTE_REPO: ${{ '${REMOTE_BASE}/${REMOTE_NAME}' }}
+  REMOTE_REPO: ${{ '${{ REMOTE_BASE }}/${{ REMOTE_NAME }}' }}
 
 jobs:
   createPullRequest:
@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.SOLANA_PAT }}
-          repository: ${REMOTE_REPO}
+          repository: ${{ REMOTE_REPO }}
 
       - name: Add changes to solana-com
         run: |
@@ -36,4 +36,4 @@ jobs:
         with:
           token: ${{ secrets.SOLANA_PAT }}
           path: $GITHUB_WORKSPACE/$REMOTE_NAME
-          repository: ${REMOTE_REPO}
+          repository: ${{ REMOTE_REPO }}
