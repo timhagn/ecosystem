@@ -33,4 +33,4 @@ jobs:
         with:
           token: ${{ secrets.SOLANA_PAT }}
           base: master
-          path: $GITHUB_WORKSPACE/solana-th
+          path: solana-th
