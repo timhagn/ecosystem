@@ -20,13 +20,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Checkout solana-com...
-        run: |
-          echo "$REMOTE_BASE/$REMOTE_NAME" >> $REMOTE_REPO
-          echo "Checking out: $REMOTE_REPO"
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.SOLANA_PAT }}
-          repository: $REMOTE_REPO
+          repository: ${{ "$REMOTE_BASE/$REMOTE_NAME" }}
 
       - name: Add changes to solana-com
         run: |
