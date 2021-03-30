@@ -31,7 +31,6 @@ jobs:
 
       - name: Add changes to solana-com
         run: |
-          ls -la
           cp $GITHUB_WORKSPACE/ecosystem/partners/* $GITHUB_WORKSPACE/solana-th/src/partners/
           cp $GITHUB_WORKSPACE/ecosystem/img/* $GITHUB_WORKSPACE/solana-th/static/img/
 
