@@ -11,15 +11,19 @@ jobs:
     steps:
       - name: Checkout ecosystem...
         uses: actions/checkout@v2
+        with:
+          path: ecosystem
 
       - name: Checkout solana-com...
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.SOLANA_PAT }}
           repository: timhagn/solana-th
+          path: solana-th
 
       - name: Add changes to solana-com
         run: |
+          ls -la
           cp $GITHUB_WORKSPACE/ecosystem/partners/* $GITHUB_WORKSPACE/solana-th/src/partners/
           cp $GITHUB_WORKSPACE/ecosystem/img/* $GITHUB_WORKSPACE/solana-th/static/img/
 
